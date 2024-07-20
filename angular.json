@@ -17,8 +17,16 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "src/polyfills.ts"
+
             ],
+            "allowedCommonJsDependencies": [
+              "pouchdb",
+              "pouchdb-authentication"
+            ],
+
+
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -87,7 +95,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/polyfills.ts"
+            ]
           }
         }
       }

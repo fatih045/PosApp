@@ -1,0 +1,83 @@
+/* Genel sayfa stilini ayarla */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Ekranı ortala */
+.place_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+
+/* İçerik kutusunun stilini ayarla */
+.place_box {
+  background-color: #ffffff;
+  border: 2px solid #ff0000;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Başlık stilini ayarla */
+.place_box h2 {
+  margin-bottom: 20px;
+  color: #ff0000;
+}
+
+/* Buton ve resim kapsayıcı stilini ayarla */
+.button_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button_link {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  text-decoration: none; /* Alt çizgiyi kaldır */
+}
+
+.button_image {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+/* Buton stilini ayarla */
+button {
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #cc0000;
+}
+
+/* Mobil uyumlu tasarım */
+@media (max-width: 600px) {
+  .place_box {
+    padding: 20px;
+  }
+  .button_image {
+    width: 80px;
+    height: 80px;
+  }
+  button {
+    padding: 8px 16px;
+  }
+}

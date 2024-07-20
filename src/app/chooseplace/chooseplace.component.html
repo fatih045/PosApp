@@ -1,0 +1,20 @@
+<!-- place.component.html -->
+<div class="place_container">
+  <div class="place_box">
+    <h2>Please Choose Place</h2>
+    <div class="button_container">
+      <a [routerLink]="['/restaurant']" class="button_link">
+        <img src="restaurant.jpg" alt="Restaurant" class="button_image">
+        <button type="button">Restaurant</button>
+      </a>
+      <a [routerLink]="['/pub']" class="button_link">
+        <img src="bar.jpg" alt="Pub" class="button_image">
+        <button type="button">Pub</button>
+      </a>
+      <a [routerLink]="['/pool']" class="button_link">
+        <img src="poolbar.jpg" alt="Pool" class="button_image">
+        <button type="button">Pool</button>
+      </a>
+    </div>
+  </div>
+</div>

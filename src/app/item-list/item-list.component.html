@@ -1,0 +1,26 @@
+
+
+<p>Ürün Listesi</p>
+<div>
+  <h2>Tüm Ürünler</h2>
+  <ul>
+    <li *ngFor="let item of items">
+      {{ item.name }} - {{ item.price }} TL
+<!--     // <button (click)="addToCart(item)">Sepete Ekle</button>-->
+    </li>
+  </ul>
+</div>
+
+
+
+<!--<p>Ürün Listesi</p>-->
+<!--<div>-->
+<!--  <h2>Tüm Ürünler</h2>-->
+<!--  <ul>-->
+<!--    <li *ngFor="let item of items">-->
+<!--      {{ item.name }} - {{ item.price }} TL-->
+<!--      <img *ngIf="item._attachments" [src]="getAttachmentUrl(item, 'kola.jpg')" alt="Product Image" width="100">-->
+<!--      &lt;!&ndash; <button (click)="addToCart(item)">Sepete Ekle</button> &ndash;&gt;-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->
