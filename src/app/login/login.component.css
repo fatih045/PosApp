@@ -1,3 +1,71 @@
+/*!* Genel sayfa stilini ayarla *!*/
+/*body, html {*/
+/*  height: 100%;*/
+/*  margin: 0;*/
+/*  font-family: Arial, sans-serif;*/
+/*}*/
+
+/*!* Login kutusunu ortala *!*/
+/*.login-container {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  height: 100vh; !* Tüm ekran yüksekliğini kapla *!*/
+/*  background-color: #f2f2f2;*/
+/*}*/
+
+/*!* Login kutusunun stilini ayarla *!*/
+/*.login-box {*/
+/*  background-color: #ffffff;*/
+/*  border: 2px solid #ff0000; !* Kırmızı kenarlık *!*/
+/*  border-radius: 10px;*/
+/*  padding: 30px; !* Padding'i arttırarak genişliği ayarla *!*/
+/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+/*  max-width: 400px;*/
+/*  width: 100%;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.login-box h2 {*/
+/*  margin-bottom: 20px;*/
+/*  color: #ff0000; !* Kırmızı başlık *!*/
+/*}*/
+
+/*.login-box input {*/
+/*  width: calc(100% - 20px);*/
+/*  padding: 10px;*/
+/*  margin: 10px 0;*/
+/*  border: 1px solid #ccc;*/
+/*  border-radius: 5px;*/
+/*}*/
+
+/*.login-box button {*/
+/*  background-color: #ff0000; !* Kırmızı buton *!*/
+/*  color: #ffffff;*/
+/*  padding: 10px 20px;*/
+/*  border: none;*/
+/*  border-radius: 5px;*/
+/*  cursor: pointer;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*.login-box button:hover {*/
+/*  background-color: #cc0000; !* Daha koyu kırmızı *!*/
+/*}*/
+
+/*!* Mobil uyumlu tasarım *!*/
+/*@media (max-width: 600px) {*/
+/*  .login-box {*/
+/*    padding: 20px; !* Mobilde padding'i biraz düşür *!*/
+/*  }*/
+/*  .login-box input {*/
+/*    margin: 5px 0;*/
+/*  }*/
+/*  .login-box button {*/
+/*    padding: 8px 16px;*/
+/*  }*/
+/*}*/
+
 /* Genel sayfa stilini ayarla */
 body, html {
   height: 100%;
@@ -62,6 +130,7 @@ body, html {
     margin: 5px 0;
   }
   .login-box button {
+
     padding: 8px 16px;
   }
 }

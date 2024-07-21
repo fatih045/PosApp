@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {CouchdbService} from "../couchdb.service";
 import {AuthService} from "../auth.service";
 import {FormsModule} from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private pouchdbService:AuthService ) {}
+  constructor(private pouchdbService:AuthService, private router: Router ) {}
 
   login() {
     console.log('Giriş bilgileri:', this.username, this.password); // Kullanıcı adı ve şifreyi konsola yazdırma
@@ -28,6 +29,7 @@ export class LoginComponent {
       .then( (response: any) =>{
         console.log('Login successful', response);
         alert("Kullanıcı girişi başarılı")
+        this.router.navigate(['/choose-place']);
 
       })
       .catch((error: any) => {

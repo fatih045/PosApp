@@ -47,6 +47,7 @@ export class AuthService {
     });
   }
 
+
   async register(userInfo: { username: string, password: string, firstName: string, lastName: string, hireDate: string }): Promise<any> {
     const salt = CryptoJS.lib.WordArray.random(16).toString();
     const iterations = 10000;
