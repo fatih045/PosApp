@@ -37,7 +37,7 @@
 // }
 
 import { Component } from '@angular/core';
-import {AuthService} from "../auth.service";
+import {AuthService} from "../services/auth.service";
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -54,8 +54,7 @@ export class RegisterComponent {
   password: string = '';
   firstName: string = '';
   lastName: string = '';
-  hireDate: string = ''; // hireDate hala string olarak alınacak
-
+  hireDate: string = '';
   constructor(private authService: AuthService) {}
 
   register() {

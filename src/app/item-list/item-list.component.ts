@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CouchdbService} from "../couchdb.service";
+import {CouchdbService} from "../services/couchdb.service";
 import {NgForOf, NgIf} from "@angular/common";
 
 @Component({

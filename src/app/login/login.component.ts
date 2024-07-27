@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {CouchdbService} from "../couchdb.service";
-import {AuthService} from "../auth.service";
+import {CouchdbService} from "../services/couchdb.service";
+import {AuthService} from "../services/auth.service";
 import {FormsModule} from "@angular/forms";
 import { Router } from '@angular/router';
 
@@ -22,7 +22,7 @@ export class LoginComponent {
   constructor(private pouchdbService:AuthService, private router: Router ) {}
 
   login() {
-    console.log('Giriş bilgileri:', this.username, this.password); // Kullanıcı adı ve şifreyi konsola yazdırma
+    console.log('Giriş bilgileri:', this.username, this.password);
 
 
     this.pouchdbService.login(this.username, this.password)
