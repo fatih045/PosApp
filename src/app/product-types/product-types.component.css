@@ -1,0 +1,11 @@
+.product-type {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.product-type.selected {
+  background-color: #cce5ff;
+  border-color: #0056b3;
+}

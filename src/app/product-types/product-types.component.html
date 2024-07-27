@@ -1,0 +1,6 @@
+<div class="product-type-container">
+  <div *ngFor="let type of productTypes" (click)="onProductTypeSelect(type.id)" class="product-type" [class.selected]="type.id === selectedProductType">
+    <div class="product-type-name">{{ type.name }}</div>
+    <div class="product-type-amount">{{ type.amount }}</div>
+  </div>
+</div>

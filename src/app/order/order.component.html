@@ -1,0 +1,51 @@
+<div class="container">
+  <h1>Sipariş Yönetim Sistemi</h1>
+
+  <!-- Siparişleri Listeleme -->
+  <section>
+    <h2>Tüm Siparişler</h2>
+    <ul>
+      <li *ngFor="let order of orders">
+        <strong>ID:</strong> {{ order._id }} <br>
+        <strong>Masası:</strong> {{ order.table_id }} <br>
+        <strong>Tarih:</strong> {{ order.date | date:'short' }} <br>
+        <strong>Toplam Tutar:</strong> {{ order.total_amount | currency:'USD' }} <br>
+        <strong>Durum:</strong> {{ order.status }} <br>
+        <button (click)="updateOrder(order)">Güncelle</button>
+        <button (click)="deleteOrder(order)">Sil</button>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Yeni Sipariş Ekleme -->
+  <section>
+    <h2>Yeni Sipariş Ekle</h2>
+    <form (ngSubmit)="addNewOrder()" #orderForm="ngForm">
+      <div>
+        <label for="table_id">Masa ID:</label>
+        <input type="text" id="table_id" [(ngModel)]="newOrder.table_id" name="table_id" required>
+      </div>
+      <div>
+        <label for="date">Tarih:</label>
+        <input type="datetime-local" id="date" [(ngModel)]="newOrder.date" name="date" required>
+      </div>
+      <div>
+        <label for="items">Ürünler (JSON formatında):</label>
+        <textarea id="items" [(ngModel)]="newOrder.items" name="items" rows="5" required></textarea>
+      </div>
+      <div>
+        <label for="total_amount">Toplam Tutar:</label>
+        <input type="number" id="total_amount" [(ngModel)]="newOrder.total_amount" name="total_amount" required>
+      </div>
+      <div>
+        <label for="status">Durum:</label>
+        <select id="status" [(ngModel)]="newOrder.status" name="status" required>
+          <option value="pending">Beklemede</option>
+          <option value="completed">Tamamlandı</option>
+          <option value="canceled">İptal Edildi</option>
+        </select>
+      </div>
+      <button type="submit">Sipariş Ekle</button>
+    </form>
+  </section>
+</div>
