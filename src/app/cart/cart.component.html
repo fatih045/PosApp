@@ -1,3 +1,4 @@
+<!-- cart.component.html -->
 <div class="cart">
   <h2>Cart</h2>
   <div *ngFor="let item of cartItems" class="cart-item">
@@ -10,5 +11,7 @@
     <div class="cart-item-price">Price: {{ item.price * item.quantity }}</div>
     <button (click)="onRemoveItem(item)">Remove</button>
   </div>
-  <div class="total-amount">Total Amount: {{ totalAmount }}</div>
+  <div class="total-amount">Total Price: {{ totalPrice }}</div>
+  <button (click)="onCreateOrder('card')">Order with Card</button>
+  <button (click)="onCreateOrder('cash')">Order with Cash</button>
 </div>

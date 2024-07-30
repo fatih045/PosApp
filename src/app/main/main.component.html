@@ -1,13 +1,19 @@
+<!-- main.component.html -->
 <div class="main-container">
   <div class="left-panel">
-    <div *ngIf="selectedTable">
+    <div *ngIf="selectedTableId">
       <button class="back-arrow" (click)="backToTableSelection()">&#8592; Back to Tables</button>
     </div>
-    <app-table-list *ngIf="!selectedTable" (selectTable)="onTableSelect($event)"></app-table-list>
-    <app-product-types *ngIf="selectedTable" (selectProductType)="onProductTypeSelect($event)" [selectedProductType]="selectedProductType"></app-product-types>
-    <app-product-list *ngIf="selectedProductType" [products]="filteredProducts" (addToCart)="onProductSelect($event)"></app-product-list>
+    <app-table-list [tables]="tables" *ngIf="!selectedTableId" (selectTable)="onTableSelect($event)"></app-table-list>
+    <app-product-types [productTypes]="productTypes" *ngIf="selectedTableId" (selectProductType)="onProductTypeSelect($event)" [selectedProductTypeId]="selectedProductTypeId"></app-product-types>
+    <app-product-list *ngIf="selectedProductTypeId" [products]="filteredProducts" (addToCart)="onProductSelect($event)"></app-product-list>
   </div>
   <div class="right-panel">
-    <app-cart [cartItems]="cartItems" [totalAmount]="totalAmount" (increaseQuantity)="increaseCartItemQuantity($event)" (decreaseQuantity)="decreaseCartItemQuantity($event)" (removeItem)="removeCartItem($event)"></app-cart>
+    <app-cart *ngIf="selectedTableId" [cartItems]="cartItems" [totalPrice]="totalPrice" 
+      (increaseQuantity)="increaseCartItemQuantity($event)" 
+      (decreaseQuantity)="decreaseCartItemQuantity($event)" 
+      (removeItem)="removeCartItem($event)"
+      (createOrder)="createOrder($event)"> <!-- Eklenen createOrder event -->
+    </app-cart>
   </div>
 </div>

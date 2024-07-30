@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductType } from '../Model/ProductType';
 
 @Component({
   selector: 'app-product-types',
@@ -9,17 +10,12 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class ProductTypesComponent {
-  @Input() selectedProductType: number | null = null;
-  @Output() selectProductType = new EventEmitter<number>();
+  @Input() selectedProductTypeId: string | null = null;
+  @Output() selectProductType = new EventEmitter<string>();
 
-  productTypes = [
-    { id: 1, name: 'Type 1', amount: 15 },
-    { id: 2, name: 'Type 2', amount: 18 },
-    { id: 3, name: 'Type 3', amount: 20 }
-    // Diğer ürün tipleri
-  ];
+  @Input() productTypes: ProductType[] = [];
 
-  onProductTypeSelect(productTypeId: number) {
+  onProductTypeSelect(productTypeId: string) {
     this.selectProductType.emit(productTypeId);
   }
 }

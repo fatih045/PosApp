@@ -1,0 +1,15 @@
+//place_id
+
+pub -> 1
+restaurant -> 2
+pool -> 3
+
+//product_type_id "pub"
+İçecek -> 1
+Çerez -> 2
+//product_type_id "restaurant"
+
+//product_type_id "pool"
+
+
+

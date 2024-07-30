@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
+import PouchDBFind from 'pouchdb-find';
+
+PouchDB.plugin(PouchDBFind);
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +36,23 @@ export class TableService {
     }).on('error', (err: any) => {
       console.error('Senkronizasyon hatası:', err);
     });
+
+    // Create an index for place_id if it doesn't exist
+    this.createPlaceIdIndex();
   }
 
- 
+  // Create an index for place_id
+  private async createPlaceIdIndex() {
+    try {
+      await this.localDB.createIndex({
+        index: { fields: ['place_id'] }
+      });
+      console.log('Index for place_id created');
+    } catch (error) {
+      console.error('Index creation error:', error);
+    }
+  }
+
   async getTableById(id: string): Promise<any> {
     try {
       const table = await this.localDB.get(id);
@@ -47,10 +64,6 @@ export class TableService {
     }
   }
 
- 
-
-  
-
   async getAllTables(): Promise<any[]> {
     try {
       const result = await this.localDB.allDocs({ include_docs: true });
@@ -59,6 +72,21 @@ export class TableService {
       return tables;
     } catch (error) {
       console.error('Masaları getirme hatası:', error);
+      throw error;
+    }
+  }
+
+  // New method to get tables by place_id
+  async getTablesByPlaceId(placeId: string): Promise<any[]> {
+    try {
+      const result = await this.localDB.find({
+        selector: { place_id: placeId }
+      });
+      const tables = result.docs;
+      console.log(`Masalar (place_id: ${placeId}):`, tables);
+      return tables;
+    } catch (error) {
+      console.error('Masaları place_id ile getirme hatası:', error);
       throw error;
     }
   }

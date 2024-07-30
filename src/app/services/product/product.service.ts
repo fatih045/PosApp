@@ -35,8 +35,6 @@ export class ProductService {
     });
   }
 
-  
-
   async getProductById(id: string): Promise<any> {
     try {
       const product = await this.localDB.get(id);
@@ -48,10 +46,6 @@ export class ProductService {
     }
   }
 
- 
-
-  
-
   async getAllProducts(): Promise<any[]> {
     try {
       const result = await this.localDB.allDocs({ include_docs: true });
@@ -60,6 +54,41 @@ export class ProductService {
       return products;
     } catch (error) {
       console.error('Ürünleri getirme hatası:', error);
+      throw error;
+    }
+  }
+  
+
+  async getProductsByPlaceId(placeId: string): Promise<any[]> {
+    try {
+      const result = await this.localDB.find({
+        selector: {
+          place_id: placeId
+        }
+      });
+      const products = result.docs;
+      console.log(`Mekan ID'sine göre ürünler (${placeId}):`, products);
+      return products;
+    } catch (error) {
+      console.error(`Mekan ID'sine göre ürünleri getirme hatası (${placeId}):`, error);
+      throw error;
+    }
+  }
+
+  
+
+  async getProductsByProductTypeId(productTypeId: number): Promise<any[]> {
+    try {
+      const result = await this.localDB.find({
+        selector: {
+          product_type_id: productTypeId
+        }
+      });
+      const products = result.docs;
+      console.log(`Ürün tipi ID'sine göre ürünler (${productTypeId}):`, products);
+      return products;
+    } catch (error) {
+      console.error(`Ürün tipi ID'sine göre ürünleri getirme hatası (${productTypeId}):`, error);
       throw error;
     }
   }
