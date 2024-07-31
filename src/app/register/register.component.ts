@@ -1,44 +1,9 @@
-// import { Component } from '@angular/core';
-// import {AuthService} from "../auth.service";
-// import {FormsModule} from "@angular/forms";
-//
-// @Component({
-//   selector: 'app-register',
-//   standalone: true,
-//   imports: [
-//     FormsModule
-//   ],
-//   templateUrl: './register.component.html',
-//   styleUrl: './register.component.css'
-// })
-// export class RegisterComponent {
-//
-//
-//   username:string ='';
-//   password:string ='';
-//
-//   constructor(private  authService:AuthService) {
-//
-//
-//   }
-//
-//   register() {
-//
-//     this.authService.register(this.username,this.password).
-//       then((response:any)=> {
-//         console.log("Register successful ",response)
-//     })
-//       .catch((error:any)=>{
-//         console.error("Register failed",error)
-//       })
-//
-//   }
-//
-// }
+
 
 import { Component } from '@angular/core';
-import {AuthService} from "../services/auth.service";
+
 import {FormsModule} from "@angular/forms";
+import {UserService} from "../services/user/user.service";
 
 @Component({
   selector: 'app-register',
@@ -50,30 +15,20 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  name: string = '';
+  email: string = '';
   username: string = '';
   password: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  hireDate: string = '';
-  constructor(private authService: AuthService) {}
+  confirmPassword: string = '';
 
-  register() {
-    const userInfo = {
-      username: this.username,
-      password: this.password,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      hireDate: this.hireDate
-    };
+  constructor(private userService: UserService) { }
 
-    this.authService.register(userInfo)
-      .then((response: any) => {
-        console.log("Register successful", response);
-        alert("Kullanıcı kaydı başarılı")
-      })
-      .catch((error: any) => {
-        console.error("Register failed", error);
-      });
+  onRegister() {
+    this.userService.register(this.name, this.email, this.username, this.password, this.confirmPassword).subscribe(response => {
+      console.log('Registration successful:', response);
+    }, error => {
+      console.error('Registration failed:', error);
+    });
   }
 }
 

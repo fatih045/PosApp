@@ -1,3 +1,4 @@
+// cart.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,11 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class CartComponent {
   @Input() cartItems: any[] = [];
-  @Input() totalAmount: number = 0;
+  @Input() totalPrice: number = 0;
 
   @Output() increaseQuantity = new EventEmitter<any>();
   @Output() decreaseQuantity = new EventEmitter<any>();
   @Output() removeItem = new EventEmitter<any>();
+  @Output() createOrder = new EventEmitter<string>(); // Eklenen EventEmitter
 
   onIncreaseQuantity(cartItem: any) {
     this.increaseQuantity.emit(cartItem);
@@ -26,5 +28,11 @@ export class CartComponent {
 
   onRemoveItem(cartItem: any) {
     this.removeItem.emit(cartItem);
+  }
+
+  onCreateOrder(paymentType: string) {
+    if (confirm("Siparişi tamamlamak istediğinize emin misiniz?")) {
+      this.createOrder.emit(paymentType);
+    }
   }
 }

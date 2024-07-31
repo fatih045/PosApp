@@ -1,98 +1,41 @@
-
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
-import PouchDBFind from 'pouchdb-find';
-import { Order } from '../Model/Order';
-
-PouchDB.plugin(PouchDBFind);
-
-// CouchDB kimlik bilgileri
-const username = 'admin';
-const password = '112233';
-const remoteDbUrl = `http://${username}:${password}@localhost:5984/orders`;
-
-const localDb = new PouchDB('orders');
-const remoteDb = new PouchDB(remoteDbUrl);
+import { Observable, from } from 'rxjs';
+import { Order } from '../Model/Order'; // Order arayüzünü import ettik
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
+  private db: PouchDB.Database;
 
   constructor() {
-    localDb.sync(remoteDb, {
+    const token = localStorage.getItem('token');
+    const password = localStorage.getItem('password');
+    const username = localStorage.getItem('user_id');
+
+    const remoteCouch = `http://${token}:${password}@localhost:5984/orders`;
+
+    this.db = new PouchDB('orders');
+    this.db.sync(remoteCouch, {
       live: true,
       retry: true
-    }).on('change', (info) => {
-      console.log('Sync change:', info);
-    }).on('paused', (err) => {
-      if (err) {
-        console.error('Sync paused:', err);
-      }
-    }).on('active', () => {
-      console.log('Sync active');
-    }).on('denied', (err) => {
-      console.error('Sync denied:', err);
-    }).on('error', (err) => {
-      console.error('Sync error:', err);
+    }).on('error', function (err) {
+      console.log('Sync error:', err);
     });
   }
 
+  getAllOrders(): Observable<any> {
+    return from(this.db.allDocs({ include_docs: true }));
+  }
   async addOrder(order: Order): Promise<any> {
     try {
-      const response = await localDb.post(order);
+      const response = await this.db.post(order);
       return response;
     } catch (error) {
       console.error('Error adding order:', error);
       throw error;
     }
   }
-
-  async updateOrder(order: Order): Promise<any> {
-    try {
-      if (!order._id) {
-        throw new Error('Order must have an _id for update');
-      }
-      const existingOrder = await localDb.get(order._id);
-      order._rev = existingOrder._rev;
-      const response = await localDb.put(order);
-      return response;
-    } catch (error) {
-      console.error('Error updating order:', error);
-      throw error;
-    }
-  }
-
-  async deleteOrder(order: Order): Promise<any> {
-    if (!order._id || !order._rev) {
-      throw new Error('Order must have both _id and _rev for deletion');
-    }
-    try {
-      const response = await localDb.remove(order._id, order._rev);
-      return response;
-    } catch (error) {
-      console.error('Error deleting order:', error);
-      throw error;
-    }
-  }
-
-  async getOrderById(id: string): Promise<Order | null> {
-    try {
-      const order = await localDb.get(id);
-      return order as Order;
-    } catch (error) {
-      console.error('Error getting order by id:', error);
-      throw error;
-    }
-  }
-
-  async getAllOrders(): Promise<Order[]> {
-    try {
-      const result = await localDb.allDocs({ include_docs: true });
-      return result.rows.map(row => row.doc as Order);
-    } catch (error) {
-      console.error('Error getting all orders:', error);
-      throw error;
-    }
-  }
 }
+

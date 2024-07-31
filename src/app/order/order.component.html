@@ -1,51 +1,16 @@
-<div class="container">
-  <h1>Sipariş Yönetim Sistemi</h1>
+<div class="order-list-container">
+  <div *ngFor="let order of orders" class="order-box">
+    <h2>Table ID: {{ order.table_id}}</h2>
+    <p><strong>Date:</strong> {{ order.date | date: 'dd/MM/yyyy, HH:mm' }}</p>
 
-  <!-- Siparişleri Listeleme -->
-  <section>
-    <h2>Tüm Siparişler</h2>
-    <ul>
-      <li *ngFor="let order of orders">
-        <strong>ID:</strong> {{ order._id }} <br>
-        <strong>Masası:</strong> {{ order.table_id }} <br>
-        <strong>Tarih:</strong> {{ order.date | date:'short' }} <br>
-        <strong>Toplam Tutar:</strong> {{ order.total_amount | currency:'USD' }} <br>
-        <strong>Durum:</strong> {{ order.status }} <br>
-        <button (click)="updateOrder(order)">Güncelle</button>
-        <button (click)="deleteOrder(order)">Sil</button>
-      </li>
-    </ul>
-  </section>
-
-  <!-- Yeni Sipariş Ekleme -->
-  <section>
-    <h2>Yeni Sipariş Ekle</h2>
-    <form (ngSubmit)="addNewOrder()" #orderForm="ngForm">
-      <div>
-        <label for="table_id">Masa ID:</label>
-        <input type="text" id="table_id" [(ngModel)]="newOrder.table_id" name="table_id" required>
-      </div>
-      <div>
-        <label for="date">Tarih:</label>
-        <input type="datetime-local" id="date" [(ngModel)]="newOrder.date" name="date" required>
-      </div>
-      <div>
-        <label for="items">Ürünler (JSON formatında):</label>
-        <textarea id="items" [(ngModel)]="newOrder.items" name="items" rows="5" required></textarea>
-      </div>
-      <div>
-        <label for="total_amount">Toplam Tutar:</label>
-        <input type="number" id="total_amount" [(ngModel)]="newOrder.total_amount" name="total_amount" required>
-      </div>
-      <div>
-        <label for="status">Durum:</label>
-        <select id="status" [(ngModel)]="newOrder.status" name="status" required>
-          <option value="pending">Beklemede</option>
-          <option value="completed">Tamamlandı</option>
-          <option value="canceled">İptal Edildi</option>
-        </select>
-      </div>
-      <button type="submit">Sipariş Ekle</button>
-    </form>
-  </section>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>Total Price:</strong> {{ order.total_price | currency }}</p>
+    <p><strong>User Id:</strong> {{ order.user_id }}</p>
+    <div *ngFor="let product of order.products" class="product-box">
+      <p><strong>Product:</strong> {{ product.name }}</p>
+      <p><strong>Per Price:</strong> {{ product.per_price | currency }}</p>
+      <p><strong>Quantity:</strong> {{ product.quantity}}</p>
+      
+    </div>
+  </div>
 </div>

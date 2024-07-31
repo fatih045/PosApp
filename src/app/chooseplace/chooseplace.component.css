@@ -1,83 +1,101 @@
-/* Genel sayfa stilini ayarla */
+/* Genel stiller */
 body, html {
-  height: 100%;
   margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
-/* Ekranı ortala */
+/* Ana konteyner */
 .place_container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f2f2f2;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* İçerik kutusunun stilini ayarla */
+/* İçerik kutusu */
 .place_box {
-  background-color: #ffffff;
-  border: 2px solid #ff0000;
-  border-radius: 10px;
+  background-color: white;
   padding: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
   width: 100%;
   text-align: center;
 }
 
-/* Başlık stilini ayarla */
+/* Başlık */
 .place_box h2 {
-  margin-bottom: 20px;
-  color: #ff0000;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
 }
 
-/* Buton ve resim kapsayıcı stilini ayarla */
+/* Buton konteyneri */
 .button_container {
+  display: inline-block;
+  margin: 10px;
+}
+
+/* Buton linki */
+.button_link {
+  text-decoration: none;
+}
+
+/* Resim ve buton kapsayıcısı */
+.image_and_button {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.button_link {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-  text-decoration: none; /* Alt çizgiyi kaldır */
-}
-
+/* Buton resmi */
 .button_image {
-  width: 100px;
-  height: 100px;
-  border-radius: 5px;
-  margin-right: 10px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease-in-out;
 }
 
-/* Buton stilini ayarla */
+.button_image:hover {
+  transform: scale(1.05);
+}
+
+/* Buton */
 button {
-  background-color: #ff0000;
-  color: #ffffff;
-  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
 }
 
 button:hover {
-  background-color: #cc0000;
+  background-color: #0056b3;
 }
 
-/* Mobil uyumlu tasarım */
-@media (max-width: 600px) {
+/* Responsive düzen */
+@media (max-width: 768px) {
   .place_box {
     padding: 20px;
   }
+
   .button_image {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
+
   button {
     padding: 8px 16px;
+    font-size: 14px;
   }
 }

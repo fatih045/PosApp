@@ -1,18 +1,40 @@
 .cart-container {
-    padding: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-  }
-  
-  .cart-total {
-    margin-top: 16px;
-    font-weight: bold;
-    text-align: right;
-  }
-  
+  display: flex;
+  flex-direction: column; /* Dikeyde düzenlemeyi sağlar */
+  justify-content: space-between; /* İçeriği yukarıdan aşağıya yayar */
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: auto;
+  height: 80vh; /* Kapsayıcı öğenin yüksekliği */
+}
+
+.cart-items-container {
+  flex: 1; /* Sepet öğelerinin esnekliğini sağlar */
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.cart-total {
+  margin-top: 16px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.payment-buttons {
+  display: flex;
+  justify-content: space-between; /* Butonlar arasında eşit boşluk bırakır */
+  width: 100%; /* Tam genişlik kaplar */
+  margin-top: 20px; /* Üstten boşluk ekler */
+}
+
+.payment-buttons button {
+  height: 40px;
+  flex: 1; /* Butonları eşit genişlikte yapar */
+  margin: 0 5px; /* Butonlar arasında küçük boşluk bırakır */
+}

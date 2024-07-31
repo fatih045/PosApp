@@ -4,9 +4,9 @@
     <div class="product-price">Price: {{ product.price }}</div>
     <div class="quantity-controls">
       <button (click)="decreaseQuantity(product)">-</button>
-      <span>{{ product.quantity }}</span>
+      <span>{{ 0 }}</span>
       <button (click)="increaseQuantity(product)">+</button>
     </div>
-    <button (click)="onAddToCart(product)">Add to Cart</button>
+    <button (click)="onAddToCart(product)">Sepete Ekle</button>
   </div>
 </div>

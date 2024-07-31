@@ -1,21 +1,13 @@
-<!-- place.component.html -->
 <div class="place_container">
   <div class="place_box">
-    <h2>Please Choose Place</h2>
-    <div class="button_container">
-      <a [routerLink]="['/orders']" class="button_link">
-        <img src="/assets/restaurant.jpg" alt="Restaurant" class="button_image">
-        <button type="button">Restaurant</button>
-      </a>
-      <a [routerLink]="['/pub/main']" class="button_link">
-        <img src="assets/bar.jpg" alt="Pub" class="button_image">
-        <button type="button">Pub</button>
-      </a>
-      <a [routerLink]="['/pool/main']" class="button_link">
-        <img src='assets/poolbar.jpg' alt="Pool" class="button_image">
-        <button type="button">Pool</button>
+    <h2>Lütfen Mekan Seçiniz</h2>
+    <div *ngFor="let place of places" class="button_container">
+      <a [routerLink]="['/main']" class="button_link" (click)="onPlaceSelect(place.id)">
+        <div class="image_and_button">
+          <img [src]="place.image_src" [alt]="place.name" class="button_image">
+          <button type="button">{{place.name}}</button>
+        </div>
       </a>
     </div>
   </div>
-
 </div>

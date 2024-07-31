@@ -1,5 +1,6 @@
 .main-container {
   display: flex;
+  padding-top: 20px;
 }
 
 .left-panel {
