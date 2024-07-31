@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {CouchdbService} from "../services/couchdb.service";
-import {AuthService} from "../services/auth.service";
-import {FormsModule} from "@angular/forms";
+import { CouchdbService } from "../services/couchdb.service";
+import { FormsModule } from "@angular/forms";
 import { Router } from '@angular/router';
+import { UserService } from "../services/user/user.service";
+import { routes } from "../app.routes";
 
 @Component({
   selector: 'app-login',
@@ -11,31 +12,25 @@ import { Router } from '@angular/router';
     FormsModule
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
 
   username: string = '';
   password: string = '';
 
-  constructor(private pouchdbService:AuthService, private router: Router ) {}
+  constructor(private userService: UserService, private router: Router) { }
 
-  login() {
-    console.log('Giriş bilgileri:', this.username, this.password);
-
-
-    this.pouchdbService.login(this.username, this.password)
-      .then( (response: any) =>{
-        console.log('Login successful', response);
-        alert("Kullanıcı girişi başarılı")
-        this.router.navigate(['/choose-place']);
-
-      })
-      .catch((error: any) => {
-        console.error('Login failed', error);
-
-      });
-
+  onLogin() {
+    this.userService.login(this.username, this.password).subscribe(response => {
+      console.log('Login successful:', response);
+      this.router.navigate(['/choose-place']);
+      // Yanıtı sakla
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('password', response.password);
+      localStorage.setItem('user_id', response.user_id);
+    }, error => {
+      console.error('Login failed:', error);
+    });
   }
 }

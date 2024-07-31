@@ -5,7 +5,7 @@ import { TableListComponent } from '../table-list/table-list.component';
 import { ProductTypesComponent } from '../product-types/product-types.component';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { CartComponent } from '../cart/cart.component';
-import { OrdersComponent } from '../orders/orders.component';
+import { OrderComponent } from '../order/order.component';
 import { ProductService } from '../services/product/product.service';
 import { TableService } from '../services/table/table.service';
 import { Product } from '../Model/Product';
@@ -23,7 +23,7 @@ import {MatTabsModule} from '@angular/material/tabs';
   standalone: true,
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
-  imports: [CommonModule, TableListComponent, ProductTypesComponent, ProductListComponent, CartComponent,OrdersComponent,MatTabsModule]
+  imports: [CommonModule, TableListComponent, ProductTypesComponent, ProductListComponent, CartComponent,OrderComponent,MatTabsModule]
 })
 export class MainComponent implements OnInit {
   selectedTabIndex: number = 0;
@@ -110,16 +110,19 @@ export class MainComponent implements OnInit {
       table_id: this.selectedTableId!.toString(),
       date: new Date().toISOString(),
       products: this.cartItems.map(item => ({
-        product_id: item.id,
+        id: item.id,
+        name: item.name,
         quantity: item.quantity,
-        price_per_unit: item.price
+        per_price: item.price
       })),
       total_price: this.totalPrice,
       status: paymentType === 'card' ? 'completed' : 'pending',
-      user_id: '',
+      user_id: localStorage.getItem('user_id') || '',
       place_id: this.placeId,
       
     };
+    
+  console.log(`Kullanıcı ID: ${localStorage.getItem('user_id')}`);
 
     try {
       await this.orderService.addOrder(newOrder);

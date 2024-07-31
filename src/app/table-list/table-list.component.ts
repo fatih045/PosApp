@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableService } from '../services/table/table.service';
 import { Table } from '../Model/Table';
 
 @Component({

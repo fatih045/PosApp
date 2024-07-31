@@ -65,13 +65,13 @@
 /*    padding: 8px 16px;*/
 /*  }*/
 /*}*/
-
 /* Dropdown Button */
 .dropbtn {
   background-color: #04AA6D;
   color: white;
   padding: 16px;
   font-size: 16px;
+
   border: none;
 }
 
@@ -79,6 +79,10 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  background-color: #f2f2f2;
+  /* Div'e de arka plan rengi ver */
+  width: 100%; /* Maksimum genişlik belirle */
+  z-index: 1; /* Öne çıkar */
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -107,8 +111,6 @@
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
-
-
 /* Genel sayfa stilini ayarla */
 body, html {
   height: 100%;

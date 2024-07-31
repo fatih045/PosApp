@@ -1,43 +1,35 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
+import PouchDBFind from 'pouchdb-find';
+
+PouchDB.plugin(PouchDBFind); // PouchDB-Find eklentisini PouchDB'ye dahil edin
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private localDB: any;
-  private remoteDB: any;
+  private db: PouchDB.Database;
 
   constructor() {
-    this.localDB = new PouchDB('local_products');
-    this.remoteDB = new PouchDB('http://localhost:5984/products', {
-      auth: {
-        username: 'admin',
-        password: '112233'
-      }
-    });
+    const token = localStorage.getItem('token');
+    const password = localStorage.getItem('password');
+    const username = localStorage.getItem('user_id');
 
-    this.localDB.sync(this.remoteDB, {
+    const remoteCouch = `http://${token}:${password}@localhost:5984/products`;
+
+    this.db = new PouchDB('products');
+    this.db.sync(remoteCouch, {
       live: true,
       retry: true
-    }).on('change', (info: any) => {
-      console.log('Senkronizasyon değişikliği:', info);
-    }).on('paused', (err: any) => {
-      console.log('Senkronizasyon durdu:', err);
-    }).on('active', () => {
-      console.log('Senkronizasyon yeniden başladı');
-    }).on('denied', (err: any) => {
-      console.error('Senkronizasyon erişim hatası:', err);
-    }).on('complete', (info: any) => {
-      console.log('Senkronizasyon tamamlandı:', info);
-    }).on('error', (err: any) => {
-      console.error('Senkronizasyon hatası:', err);
+    }).on('error', function (err) {
+      console.log('Sync error:', err);
     });
   }
 
   async getProductById(id: string): Promise<any> {
     try {
-      const product = await this.localDB.get(id);
+      const product = await this.db.get(id);
       console.log('Ürün bulundu:', product);
       return product;
     } catch (error) {
@@ -48,7 +40,7 @@ export class ProductService {
 
   async getAllProducts(): Promise<any[]> {
     try {
-      const result = await this.localDB.allDocs({ include_docs: true });
+      const result = await this.db.allDocs({ include_docs: true });
       const products = result.rows.map((row: any) => row.doc);
       console.log('Tüm ürünler:', products);
       return products;
@@ -61,7 +53,7 @@ export class ProductService {
 
   async getProductsByPlaceId(placeId: string): Promise<any[]> {
     try {
-      const result = await this.localDB.find({
+      const result = await this.db.find({
         selector: {
           place_id: placeId
         }
@@ -79,7 +71,7 @@ export class ProductService {
 
   async getProductsByProductTypeId(productTypeId: number): Promise<any[]> {
     try {
-      const result = await this.localDB.find({
+      const result = await this.db.find({
         selector: {
           product_type_id: productTypeId
         }

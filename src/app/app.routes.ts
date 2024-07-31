@@ -3,6 +3,7 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {ChooseplaceComponent} from "./chooseplace/chooseplace.component";
 import { MainComponent } from './main/main.component';
+import { OrderComponent } from './order/order.component';
 
 
 export const routes: Routes = [
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'choose-place', component: ChooseplaceComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'main', component: MainComponent},
+  
 
   
 

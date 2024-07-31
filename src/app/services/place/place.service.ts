@@ -1,45 +1,38 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
+import PouchDBFind from 'pouchdb-find';
+
+PouchDB.plugin(PouchDBFind); // PouchDB-Find eklentisini PouchDB'ye dahil edin
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaceService {
-  private localDB: any;
-  private remoteDB: any;
+  private db: PouchDB.Database;
 
   constructor() {
-    this.localDB = new PouchDB('local_places');
-    this.remoteDB = new PouchDB('http://localhost:5984/places', {
-      auth: {
-        username: 'admin',
-        password: '112233'
-      }
-    });
+    const token = localStorage.getItem('token');
+    const password = localStorage.getItem('password');
+    const username = localStorage.getItem('user_id');
 
-    this.localDB.sync(this.remoteDB, {
+    const remoteCouch = `http://${token}:${password}@localhost:5984/places`;
+
+    this.db = new PouchDB('places');
+    this.db.sync(remoteCouch, {
       live: true,
       retry: true
-    }).on('change', (info: any) => {
-      console.log('Senkronizasyon değişikliği:', info);
-    }).on('paused', (err: any) => {
-      console.log('Senkronizasyon durdu:', err);
-    }).on('active', () => {
-      console.log('Senkronizasyon yeniden başladı');
-    }).on('denied', (err: any) => {
-      console.error('Senkronizasyon erişim hatası:', err);
-    }).on('complete', (info: any) => {
-      console.log('Senkronizasyon tamamlandı:', info);
-    }).on('error', (err: any) => {
-      console.error('Senkronizasyon hatası:', err);
+    }).on('error', function (err) {
+      console.log('Sync error:', err);
     });
   }
+
 
   
 
   async getAllPlaces(): Promise<any[]> {
     try {
-      const result = await this.localDB.find({
+      const result = await this.db.find({
         selector: {
           type: "place"
         } 

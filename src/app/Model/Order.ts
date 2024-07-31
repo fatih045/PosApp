@@ -1,19 +1,21 @@
+export interface Product_{
+  id: string;
+  name: string;
+  per_price: number;
+  quantity: number;
+}
+
+
 export interface Order {
   _id: string;
   _rev?: string; // _rev optional yapıldı, çünkü yeni oluşturulan belgelerde olmayabilir
   id: string;
   type: string; // 'order'
-  table_id: string;
-  user_id: string;
-  place_id: string
-
+  user_id: string|null;
+  products: Product_[];
   date: string;
-  products: Array<{
-    product_id: string;
-    quantity: number;
-    price_per_unit: number;
-  }>;
-  total_price: number;
-  
   status: string; // 'completed', 'pending', 'canceled', vb.
+  total_price: number;
+  table_id: string;
+  place_id: string;
 }
