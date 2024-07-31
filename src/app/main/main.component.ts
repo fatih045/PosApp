@@ -5,6 +5,7 @@ import { TableListComponent } from '../table-list/table-list.component';
 import { ProductTypesComponent } from '../product-types/product-types.component';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { CartComponent } from '../cart/cart.component';
+import { OrdersComponent } from '../orders/orders.component';
 import { ProductService } from '../services/product/product.service';
 import { TableService } from '../services/table/table.service';
 import { Product } from '../Model/Product';
@@ -13,6 +14,7 @@ import { ProductTypeService } from '../services/product-type/product-type.servic
 import { OrderService } from '../services/order.service';
 import { Order } from '../Model/Order';
 import { SharedService } from '../shared.service';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -21,9 +23,10 @@ import { SharedService } from '../shared.service';
   standalone: true,
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
-  imports: [CommonModule, TableListComponent, ProductTypesComponent, ProductListComponent, CartComponent]
+  imports: [CommonModule, TableListComponent, ProductTypesComponent, ProductListComponent, CartComponent,OrdersComponent,MatTabsModule]
 })
 export class MainComponent implements OnInit {
+  selectedTabIndex: number = 0;
   selectedTableId: string | null = null;
   selectedProductTypeId: string | null = null;
   tables: any[] = [];
@@ -50,6 +53,9 @@ export class MainComponent implements OnInit {
       console.error('Veriler yüklenirken hata oluştu:', error);
       alert('Veriler yüklenirken bir hata oluştu. Lütfen tekrar deneyin.');
     }
+  }
+  onTabChange(event: any) {
+    this.selectedTabIndex = event.index;
   }
 
   onTableSelect(tableId: string) {

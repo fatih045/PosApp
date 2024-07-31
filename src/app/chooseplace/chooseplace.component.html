@@ -1,10 +1,12 @@
 <div class="place_container">
   <div class="place_box">
-    <h2>Please Choose Place</h2>
+    <h2>Lütfen Mekan Seçiniz</h2>
     <div *ngFor="let place of places" class="button_container">
-      <a [routerLink]="['/main']" [queryParams]="{ id: place.id }" class="button_link" (click)="onPlaceSelect(place.id)">
-        <img [src]="place.image_src" alt="Restaurant" class="button_image">
-        <button type="button">Restaurant</button>
+      <a [routerLink]="['/main']" class="button_link" (click)="onPlaceSelect(place.id)">
+        <div class="image_and_button">
+          <img [src]="place.image_src" [alt]="place.name" class="button_image">
+          <button type="button">{{place.name}}</button>
+        </div>
       </a>
     </div>
   </div>

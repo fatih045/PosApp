@@ -1,17 +1,20 @@
-<!-- cart.component.html -->
-<div class="cart">
-  <h2>Cart</h2>
-  <div *ngFor="let item of cartItems" class="cart-item">
-    <div class="cart-item-name">{{ item.name }}</div>
-    <div class="cart-item-quantity">
-      Quantity: {{ item.quantity }}
-      <button (click)="onDecreaseQuantity(item)">-</button>
-      <button (click)="onIncreaseQuantity(item)">+</button>
+<div class="cart-container">
+  <div class="cart-items-container">
+    <h2>Sepet</h2>
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <div class="cart-item-name">{{ item.name }}</div>
+      <div class="cart-item-quantity">
+        Miktar: {{ item.quantity }}
+        <button (click)="onDecreaseQuantity(item)">-</button>
+        <button (click)="onIncreaseQuantity(item)">+</button>
+      </div>
+      <div class="cart-item-price">Fiyat: {{ item.price * item.quantity }}</div>
+      <button (click)="onRemoveItem(item)">Sil</button>
     </div>
-    <div class="cart-item-price">Price: {{ item.price * item.quantity }}</div>
-    <button (click)="onRemoveItem(item)">Remove</button>
+    <div class="cart-total">Toplam Fiyat: {{ totalPrice }}</div>
   </div>
-  <div class="total-amount">Total Price: {{ totalPrice }}</div>
-  <button (click)="onCreateOrder('card')">Order with Card</button>
-  <button (click)="onCreateOrder('cash')">Order with Cash</button>
+  <div class="payment-buttons">
+    <button (click)="onCreateOrder('card')">Kartla Ödeme</button>
+    <button (click)="onCreateOrder('cash')">Nakitle Ödeme</button>
+  </div>
 </div>

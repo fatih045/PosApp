@@ -39,8 +39,12 @@ export class PlaceService {
 
   async getAllPlaces(): Promise<any[]> {
     try {
-      const result = await this.localDB.allDocs({ include_docs: true });
-      const places = result.rows.map((row: any) => row.doc);
+      const result = await this.localDB.find({
+        selector: {
+          type: "place"
+        } 
+        });
+      const places = result.docs;
       console.log('Tüm mekanlar:', places);
       return places;
     } catch (error) {

@@ -1,5 +1,7 @@
 <div class="table-container">
   <div *ngFor="let table of tables" class="table" (click)="onSelectTable(table.id)">
-    {{"Masa " + table.table_number }}
+    <div class="table-name">
+      {{"Masa " + table.table_number }}
+    </div>
   </div>
 </div>

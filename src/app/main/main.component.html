@@ -1,8 +1,12 @@
-<!-- main.component.html -->
-<div class="main-container">
+<mat-tab-group (selectedTabChange)="onTabChange($event)">
+  <mat-tab label="Sipariş alma ekranı"></mat-tab>
+  <mat-tab label="Siparişler"></mat-tab>
+</mat-tab-group>
+
+<div *ngIf="selectedTabIndex === 0" class="main-container">
   <div class="left-panel">
     <div *ngIf="selectedTableId">
-      <button class="back-arrow" (click)="backToTableSelection()">&#8592; Back to Tables</button>
+      <button class="back-arrow" (click)="backToTableSelection()">&#8592; Masalara Dön</button>
     </div>
     <app-table-list [tables]="tables" *ngIf="!selectedTableId" (selectTable)="onTableSelect($event)"></app-table-list>
     <app-product-types [productTypes]="productTypes" *ngIf="selectedTableId" (selectProductType)="onProductTypeSelect($event)" [selectedProductTypeId]="selectedProductTypeId"></app-product-types>
@@ -13,7 +17,9 @@
       (increaseQuantity)="increaseCartItemQuantity($event)" 
       (decreaseQuantity)="decreaseCartItemQuantity($event)" 
       (removeItem)="removeCartItem($event)"
-      (createOrder)="createOrder($event)"> <!-- Eklenen createOrder event -->
+      (createOrder)="createOrder($event)">
     </app-cart>
   </div>
 </div>
+
+<app-orders *ngIf="selectedTabIndex === 1"></app-orders>
