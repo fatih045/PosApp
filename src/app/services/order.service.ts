@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Order } from '../Model/Order'; // Order arayüzünü import ettik
+import { Order } from '../Model/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -57,11 +57,11 @@ export class OrderService {
 
   async addOrder(order: Order) {
     try {
-      // Eğer siparişin _id'si varsa, update işlemi yapın
+
       if (order._id) {
         return this.db.put(order);
       }
-      // Yeni sipariş ekleme işlemi
+
       return this.db.post(order);
     } catch (error) {
       throw new Error('Error adding order:' );
