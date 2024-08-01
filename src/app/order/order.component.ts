@@ -39,6 +39,7 @@ import { Order } from '../Model/Order'; // Order arayüzünü import ettik
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CurrencyPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
+import {SharedService} from "../shared.service";
 
 @Component({
   selector: 'app-order',
@@ -57,7 +58,7 @@ export class OrderComponent implements OnInit {
 
   orders: Order[] = [];
 
-  constructor(private orderService: OrderService, private router: Router) {}
+  constructor(private orderService: OrderService, private router: Router, private sharedService: SharedService) {}
 
   ngOnInit() {
     this.orderService.getAllOrders().subscribe(data => {
@@ -69,8 +70,11 @@ export class OrderComponent implements OnInit {
   }
 
   editOrder(order: Order) {
-    this.router.navigate(['/edit-order', order._id]);
+    // Güncellenen siparişi paylaşılan servis aracılığıyla ana bileşene aktar
+    this.sharedService.setOrderData(order);
+    this.router.navigate(['/main']);
   }
+
 
   deleteOrder(id: string) {
     if (confirm('Siparişi silmek istediğinizden emin misiniz?')) {

@@ -4,6 +4,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ChooseplaceComponent} from "./chooseplace/chooseplace.component";
 import { MainComponent } from './main/main.component';
 import { OrderComponent } from './order/order.component';
+import {EditOrderComponent} from "./edit-order/edit-order.component";
 
 
 export const routes: Routes = [
@@ -14,9 +15,10 @@ export const routes: Routes = [
   { path: 'choose-place', component: ChooseplaceComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'main', component: MainComponent},
-  
+  { path: 'edit-order/:id', component: EditOrderComponent },
+  { path: 'order', component: OrderComponent },
 
-  
+
 
 ];
 

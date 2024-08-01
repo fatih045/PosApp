@@ -1,0 +1,21 @@
+<div *ngIf="order" class="edit-order-container">
+  <h2>Siparişi Güncelle</h2>
+  <form (ngSubmit)="updateOrder()">
+    <div>
+      <label for="table_id">Table ID:</label>
+      <input type="text" id="table_id" [(ngModel)]="order.table_id" name="table_id">
+    </div>
+    <div>
+      <label for="status">Status:</label>
+      <select id="status" [(ngModel)]="order.status" name="status">
+        <option value="pending">Pending</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+    <div>
+      <label for="total_price">Total Price:</label>
+      <input type="number" id="total_price" [(ngModel)]="order.total_price" name="total_price">
+    </div>
+    <button type="submit">Güncelle</button>
+  </form>
+</div>
