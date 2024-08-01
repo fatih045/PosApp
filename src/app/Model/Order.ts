@@ -8,7 +8,7 @@ export interface Product_{
 
 export interface Order {
   _id: string;
-  _rev?: string; // _rev optional yapıldı, çünkü yeni oluşturulan belgelerde olmayabilir
+  _rev?: string;
   id: string;
   type: string; // 'order'
   user_id: string|null;
