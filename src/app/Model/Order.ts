@@ -18,4 +18,5 @@ export interface Order {
   total_price: number;
   table_id: string;
   place_id: string;
+   systemStatus?: string;
 }

@@ -7,6 +7,8 @@
     <p><strong>Status:</strong> {{ order.status }}</p>
     <p><strong>Total Price:</strong> {{ order.total_price | currency }}</p>
     <p><strong>User Id:</strong> {{ order.user_id }}</p>
+    <p *ngIf="order.systemStatus === 'Not Connected'" style="color: red;">&#9888; Not Connected</p>
+
     <div *ngFor="let product of order.products" class="product-box">
       <p><strong>Product:</strong> {{ product.name }}</p>
       <p><strong>Per Price:</strong> {{ product.per_price | currency }}</p>
